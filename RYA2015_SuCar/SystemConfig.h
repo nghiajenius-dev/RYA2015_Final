@@ -1,0 +1,93 @@
+/**
+ *	Raise your ARM 2015 sample code http://raiseyourarm.com/
+ *	Author: Pay it forward club
+ *	http://www.payitforward.edu.vn
+ *  version 0.0.1
+ */
+
+/**
+ * @file	SystemConfig.h
+ * @brief	Config system
+ */
+
+#ifndef SYSTEMCONFIG_H_
+#define SYSTEMCONFIG_H_
+
+
+#define DRV_ENABLE_LEFT_CHN_PERIPHERAL		SYSCTL_PERIPH_GPIOB
+#define DRV_ENABLE_RIGHT_CHN_PERIPHERAL		SYSCTL_PERIPH_GPIOB
+#define DRV_ENABLE_LEFT_CHN_PORT			GPIO_PORTB_BASE
+#define DRV_ENABLE_RIGHT_CHN_PORT			GPIO_PORTB_BASE
+#define DRV_ENABLE_LEFT_CHN_PIN				GPIO_PIN_3
+#define DRV_ENABLE_RIGHT_CHN_PIN			GPIO_PIN_7
+
+#define BOOST_ENABLE_PREIPHERAL				SYSCTL_PERIPH_GPIOA
+#define BOOST_ENABLE_PORT					GPIO_PORTA_BASE
+#define BOOST_ENABLE_PIN					GPIO_PIN_7
+
+#define LED1_PERIPHERAL						SYSCTL_PERIPH_GPIOA
+#define LED1_PORT							GPIO_PORTA_BASE
+#define LED1_PIN							GPIO_PIN_4
+#define LED1_ON()							ROM_GPIOPinWrite(LED1_PORT, LED1_PIN, LED1_PIN)
+#define LED1_OFF()							ROM_GPIOPinWrite(LED1_PORT, LED1_PIN, 0x00)
+#define LED1_TOGGLE()						ROM_GPIOPinWrite(LED1_PORT, LED1_PIN, ~ROM_GPIOPinRead(LED1_PORT,LED1_PIN))
+
+#define LED2_PERIPHERAL						SYSCTL_PERIPH_GPIOC
+#define LED2_PORT							GPIO_PORTC_BASE
+#define LED2_PIN							GPIO_PIN_4
+#define LED2_ON()							ROM_GPIOPinWrite(LED2_PORT, LED2_PIN, LED2_PIN)
+#define LED2_OFF()							ROM_GPIOPinWrite(LED2_PORT, LED2_PIN, 0x00)
+#define LED2_TOGGLE()						ROM_GPIOPinWrite(LED2_PORT, LED2_PIN, ~ROM_GPIOPinRead(LED2_PORT,LED2_PIN))
+
+#define LED3_PERIPHERAL						SYSCTL_PERIPH_GPIOA
+#define LED3_PORT							GPIO_PORTA_BASE
+#define LED3_PIN							GPIO_PIN_6
+#define LED3_ON()							ROM_GPIOPinWrite(LED3_PORT, LED3_PIN, LED3_PIN)
+#define LED3_OFF()							ROM_GPIOPinWrite(LED3_PORT, LED3_PIN, 0x00)
+#define LED3_TOGGLE()						ROM_GPIOPinWrite(LED3_PORT, LED3_PIN, ~ROM_GPIOPinRead(LED3_PORT,LED3_PIN))
+
+#define LED4_PERIPHERAL						SYSCTL_PERIPH_GPIOF
+#define LED4_PORT							GPIO_PORTF_BASE
+#define LED4_PIN							GPIO_PIN_1
+#define LED4_ON()							ROM_GPIOPinWrite(LED4_PORT, LED4_PIN, LED4_PIN)
+#define LED4_OFF()							ROM_GPIOPinWrite(LED4_PORT, LED4_PIN, 0x00)
+#define LED4_TOGGLE()						ROM_GPIOPinWrite(LED4_PORT, LED4_PIN, ~ROM_GPIOPinRead(LED4_PORT,LED4_PIN))
+
+#define LED5_PERIPHERAL						SYSCTL_PERIPH_GPIOF
+#define LED5_PORT							GPIO_PORTF_BASE
+#define LED5_PIN							GPIO_PIN_2
+#define LED5_ON()							ROM_GPIOPinWrite(LED5_PORT, LED5_PIN, LED5_PIN)
+#define LED5_OFF()							ROM_GPIOPinWrite(LED5_PORT, LED5_PIN, 0x00)
+#define LED5_TOGGLE()						ROM_GPIOPinWrite(LED5_PORT, LED5_PIN, ~ROM_GPIOPinRead(LED5_PORT,LED5_PIN))
+
+#define LED6_PERIPHERAL						SYSCTL_PERIPH_GPIOF
+#define LED6_PORT							GPIO_PORTF_BASE
+#define LED6_PIN							GPIO_PIN_3
+#define LED6_ON()							ROM_GPIOPinWrite(LED6_PORT, LED6_PIN, LED6_PIN)
+#define LED6_OFF()							ROM_GPIOPinWrite(LED6_PORT, LED6_PIN, 0x00)
+#define LED6_TOGGLE()						ROM_GPIOPinWrite(LED6_PORT, LED6_PIN, ~ROM_GPIOPinRead(LED6_PORT,LED6_PIN))
+
+typedef enum
+{
+	SYSTEM_POWER_UP = 0,
+	SYSTEM_INITIALIZE,
+	SYSTEM_CALIB_SENSOR,
+	SYSTEM_SAVE_CALIB_SENSOR,
+	SYSTEM_GET_MOTOR_MODEL,
+	SYSTEM_ESTIMATE_MOTOR_MODEL,
+	SYSTEM_SAVE_MOTOR_MODEL,
+	SYSTEM_WAIT_TO_RUN,
+	SYSTEM_RUN_SOLVE_MAZE,
+	SYSTEM_RUN_IMAGE_PROCESSING,
+	SYSTEM_ERROR
+} SYSTEM_STATE;
+
+extern void Config_System(void);
+extern void BattSense_init(void);
+extern void LED_Display_init(void);
+extern SYSTEM_STATE system_GetState(void);
+extern void system_SetState(SYSTEM_STATE SysState);
+extern void system_Process_System_State(void);
+extern uint32_t u32_UsrSystemClockGet();
+
+#endif /* SYSTEMCONFIG_H_ */
